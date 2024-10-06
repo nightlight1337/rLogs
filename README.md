@@ -3,7 +3,9 @@
 📖 API
 
 POST: site/logs/add-log/
+
 🇷🇺 пример: Body (json): {"message": "776 was arrested", "category": "Arrests", "user": "776"}
+
 🇺🇸/🇬🇧 example: Body (json): {"message": "776 был арестован", "category": "Аресты", "user": "776"}
 
 RUS 🇷🇺
