@@ -1,0 +1,97 @@
+<!-- logs/templates/logs/log_entry_list.html -->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Журнал</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Журнал</h1>
+        <form method="get" class="mb-3">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Поиск...">
+                </div>
+                <div class="col">
+                    <select name="category" class="form-control">
+                        <option value="all" {% if selected_category == "all" %}selected{% endif %}>Все категории</option>
+                        {% for category in categories %}
+                        <option value="{{ category }}" {% if selected_category == category %}selected{% endif %}>{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Фильтровать</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Время</th>
+                    <th>Категория</th>
+                    <th>Пользователь</th>
+                    <th>Сообщение</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in log_entries %}
+                <tr>
+                    <td>{{ entry.timestamp }}</td>
+                    <td>{{ entry.category }}</td>
+                    <td>{{ entry.user }}</td>
+                    <td>{{ entry.message }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Нет записей</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if log_entries.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1&q={{ query }}&category={{ selected_category }}">Первая</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ log_entries.previous_page_number }}&q={{ query }}&category={{ selected_category }}">Назад</a>
+                </li>
+                {% endif %}
+
+                {% for num in log_entries.paginator.page_range %}
+                {% if log_entries.number == num %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}&q={{ query }}&category={{ selected_category }}">{{ num
+                        }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if log_entries.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ log_entries.next_page_number }}&q={{ query }}&category={{ selected_category }}">Вперед</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ log_entries.paginator.num_pages }}&q={{ query }}&category={{ selected_category }}">Последняя</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>
