@@ -16,8 +16,7 @@ RUS 🇷🇺
 
 
 🌍 Требуется:
-Python
-Django
+Python + Django
 
 **ВЫ МОЖЕТЕ ИСПОЛЬЗОВАТЬ ЭТОТ СКРИПТ ДЛЯ ЛЮБЫХ ЦЕЛЕЙ, НЕ НАДО СПРАШИВАТЬ МОЕГО РАЗРЕШЕНИЯ НА ИСПОЛЬЗОВАНИЕ ЭТОЙ РАБОТЫ.**
 
@@ -30,7 +29,6 @@ It is a mini system that allows you to add and track order to any of your progra
 
 
 🌍 Required:
-Python
-Django
+Python + Django
 
 **YOU CAN USE THIS SCRIPT FOR ANY PURPOSE, YOU DON'T NEED TO ASK MY PERMISSION TO USE THIS WORK.**
